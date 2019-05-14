@@ -2,6 +2,8 @@
 using System.Text;
 using System.Threading.Tasks;
 using System;
+using System.Threading;
+
 
 namespace appDev
 {
@@ -20,13 +22,15 @@ namespace appDev
                 EntityPath = EventHubName
             };
         
-            eventHubClient = new EventHubClient.CreateFromConnectionString(EventHubConnectionString);
+            eventHubClient = EventHubClient.CreateFromConnectionString(EventHubConnectionString);
 
-            await SendMessage(100);
+            SendMessage(100);
 
+
+            Console.ReadLine();
         }
 
-        private async Task SendMessage(int count) { 
+        private static async Task SendMessage(int count) { 
 
            var message = "sending message content "  + DateTime.Now.ToShortDateString();
            await eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(message)));
