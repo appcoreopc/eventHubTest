@@ -19,13 +19,14 @@ namespace appDev
 
             var eventConnectionBuilder = new EventHubsConnectionStringBuilder(EventHubConnectionString)
             {
-                EntityPath = EventHubName
+                EntityPath = "test"
             };
+
+            Console.WriteLine("Hello World 222!");
         
-            eventHubClient = EventHubClient.CreateFromConnectionString(EventHubConnectionString);
+            eventHubClient = EventHubClient.CreateFromConnectionString(eventConnectionBuilder.ToString());
 
             SendMessage(100);
-
 
             Console.ReadLine();
         }
